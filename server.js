@@ -5,14 +5,46 @@
 // modules ----------------------
 var express             = require('express');
 var path                = require('path');
+var cors = require('express-cors')
 
 // Environment ------------------
 var env = process.env.NODE_ENV || 'development';
 var port = process.env.PORT || 8000;
 
 // Express Setup ----------------
-var app = express();
-var router = express.Router();
+var express = require('express');
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+server.listen(port);
+
+
+//allows CORs
+app.use(cors({
+  allowedOrigins: [
+    'localhost:7000', 'localhost:8000'
+  ]
+}));
+
+io.on('connection', function(socket){
+  console.log('user connectd');
+  socket.on('init', (user) => {
+    console.log(user);
+    io.emit(user);
+  })
+  //send message logic
+  socket.on('push_message', (data) => {
+    socket.emit('pull_message', (data));
+  })
+  socket.on('disconnect', function(){
+    console.log('a user disconnected');
+  });
+  socket.on('messageAdded', function(message) {
+    // io.emit('messageAdded', message); // broadcast to all clients
+    socket.broadcast.emit('messageAdded', message); // broadcast to all but the sender
+  });
+})
 
 // Static files -----------------
 app.use(express.static(__dirname + '/production'));
@@ -24,7 +56,7 @@ app.get('*', function(req, res) {
 
 // Launch app -------------------
 //app.listen(port);
-app.listen(port);
+
 //app.listen(port, '10.134.0.227');
 console.log("*** server running");
 exports = module.exports = app;

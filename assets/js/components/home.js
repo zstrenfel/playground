@@ -2,8 +2,9 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router';
 import ArenaList from '../../../ArenaList.json'
+import io from 'socket.io-client'
 
-
+let socket = io(`http://localhost:8000`)
 
 class Home extends React.Component {
   constructor(props) {
@@ -14,12 +15,13 @@ class Home extends React.Component {
     let arenaList = this.state.arenas.map((arena) => {
       let linkLocation = '/arena' + arena.altName
       return (
-        <li><Link to={`/arena/${arena.altName}`}> {arena.arenaName} </Link></li>
+        <li key={arena.arenaNumber}><Link to={`/arena/${arena.altName}`}> {arena.arenaName} </Link></li>
       )
     })
     return arenaList;
   }
   render() {
+    console.log('here');
     let arenas = this.getArenas();
     return (
       <div className="home">

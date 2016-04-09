@@ -30,6 +30,7 @@ gulp.task('browser-sync', ['nodemon'], function() {
     proxy: "http://localhost:8000",
     files: ["production/bundle.js", "production/bundle.css", "production/index.html"],
     browser: "firefox",
+    ws: true,
     port: 7000,
     online: true
   });
