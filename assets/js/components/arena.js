@@ -11,6 +11,34 @@ import Data from './wordlistLevel1.json'
 var data = Data.data[0];
 
 class Arena extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {guess: "",
+                  user: {name: "John"},
+                  opponent: {}}
+    this.changeHandler = this.changeHandler.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    socket.on('pull_message', (data) => {
+      console.log('message recived', data);
+    });
+    socket.emit('init', this.state.user);
+  }
+
+
+  handleSubmit(e) {
+    e.preventDefault();
+    let message = {
+      guess: this.state.guess
+    }
+    socket.emit('push_message', message)
+    this.setState({guess: ""});
+  }
+  changeHandler(e) {
+    this.setState({guess: e.target.value});
+  }
 
   constructor(props) {
   	super(props);
