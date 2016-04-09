@@ -13,6 +13,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
+var _nodeEmoji = require('node-emoji');
+
+var _nodeEmoji2 = _interopRequireDefault(_nodeEmoji);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45,7 +49,22 @@ var App = function (_React$Component) {
             'Playground'
           )
         ),
-        this.props.children
+        this.props.children,
+        _react2.default.createElement(
+          'footer',
+          { className: 'final' },
+          ' Made with ',
+          _nodeEmoji2.default.get('coffee'),
+          ' & ',
+          _nodeEmoji2.default.get('heart'),
+          ' & ',
+          _nodeEmoji2.default.get('eggplant'),
+          ' & ',
+          _nodeEmoji2.default.get('new_moon_with_face'),
+          ' & ',
+          _nodeEmoji2.default.get('beers'),
+          '.'
+        )
       );
     }
   }]);
@@ -178,10 +197,6 @@ var _ArenaList = require('../../../ArenaList.json');
 
 var _ArenaList2 = _interopRequireDefault(_ArenaList);
 
-var _socket = require('socket.io-client');
-
-var _socket2 = _interopRequireDefault(_socket);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -189,8 +204,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var socket = (0, _socket2.default)('http://localhost:8000');
 
 var Home = function (_React$Component) {
   _inherits(Home, _React$Component);
@@ -200,21 +213,24 @@ var Home = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Home).call(this, props));
 
-    _this.state = { arenas: _ArenaList2.default.arenas };
+    _this.state = { arenas: _ArenaList2.default.arenas, name: "" };
+    _this.handleChange = _this.handleChange.bind(_this);
     return _this;
   }
 
   _createClass(Home, [{
     key: 'getArenas',
     value: function getArenas() {
+      var _this2 = this;
+
+      var self = this;
       var arenaList = this.state.arenas.map(function (arena) {
-        var linkLocation = '/arena' + arena.altName;
         return _react2.default.createElement(
           'li',
           { key: arena.arenaNumber },
           _react2.default.createElement(
             _reactRouter.Link,
-            { to: '/arena/' + arena.altName },
+            { to: '/arena/' + arena.altName + '/' + _this2.state.name },
             ' ',
             arena.arenaName,
             ' '
@@ -224,25 +240,93 @@ var Home = function (_React$Component) {
       return arenaList;
     }
   }, {
+    key: 'handleChange',
+    value: function handleChange(e) {
+      e.preventDefault;
+      this.setState({ name: e.target.value });
+    }
+  }, {
     key: 'render',
     value: function render() {
-      console.log('here');
       var arenas = this.getArenas();
       return _react2.default.createElement(
         'div',
         { className: 'home' },
         _react2.default.createElement(
-          'h2',
-          null,
-          'Choose an Arena'
+          'div',
+          { className: 'name' },
+          _react2.default.createElement(
+            'h2',
+            null,
+            ' Enter Your Name '
+          ),
+          _react2.default.createElement('input', { onChange: this.handleChange, value: this.state.name })
         ),
         _react2.default.createElement(
           'div',
-          { className: 'arena-list' },
+          { className: 'cause' },
           _react2.default.createElement(
-            'ul',
+            'h2',
             null,
-            arenas
+            ' Choose a Cause '
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'cause wrapper' },
+            _react2.default.createElement(
+              'div',
+              { className: 'cause-third' },
+              _react2.default.createElement('img', { src: './imgs/saparkul.jpg' }),
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Saparkul'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'cause-third' },
+              _react2.default.createElement('img', { src: './imgs/sergio.jpg' }),
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Sergio'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'cause-third' },
+              _react2.default.createElement('img', { src: './imgs/yazan.jpg' }),
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Yazan'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'footer',
+            null,
+            ' sponsored by ',
+            _react2.default.createElement('img', { src: './imgs/kiva.png' })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'arena-wrapper' },
+          _react2.default.createElement(
+            'h2',
+            null,
+            'Choose an Arena'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'arena-list' },
+            _react2.default.createElement(
+              'ul',
+              null,
+              arenas
+            )
           )
         )
       );

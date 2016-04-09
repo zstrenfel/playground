@@ -33,7 +33,7 @@ header {
   background-color: $background-grey;
   text-align: center;
   padding-top: 40px;
-  border-bottom: 2px solid darken($background-grey, 10%);;
+  border-bottom: 2px solid darken($background-grey, 10%);
 
   h1 {
     color: $secondary-font;
@@ -43,4 +43,27 @@ header {
 .home, .arena {
   padding: 20px;
   text-align: center;
+}
+
+
+input {
+  @include span-columns(12);
+
+  border: 2px solid darken($background-grey, 10%);
+  height: 35px;
+  font-size: 1.2em;
+  color: darken($background-grey, 55%);
+  line-height: 1.2;
+  padding: 3px;
+}
+
+footer.final {
+  @include span-columns(12);
+  height: 70px;
+  background-color: $background-grey;
+  text-align: center;
+  font-size: .8em;
+  color: darken($background-grey, 20%);
+  padding-top: 20px;
+  border-top: 2px solid darken($background-grey, 10%);
 }

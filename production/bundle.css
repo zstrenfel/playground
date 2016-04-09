@@ -47,6 +47,35 @@ header {
   padding: 20px;
   text-align: center; }
 
+input {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%;
+  border: 2px solid gainsboro;
+  height: 35px;
+  font-size: 1.2em;
+  color: dimgray;
+  line-height: 1.2;
+  padding: 3px; }
+  input:last-child {
+    margin-right: 0; }
+
+footer.final {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%;
+  height: 70px;
+  background-color: #F5F5F5;
+  text-align: center;
+  font-size: .8em;
+  color: #c2c2c2;
+  padding-top: 20px;
+  border-top: 2px solid gainsboro; }
+  footer.final:last-child {
+    margin-right: 0; }
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -85,6 +114,96 @@ header {
 .swipe-leave.swipe-leave-active {
   opacity: 0.01; }
 
+.home div.name {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 65.88078%;
+  margin-left: 17.05961%;
+  height: auto;
+  background-color: #f8f8f8;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #F5F5F5;
+  border-radius: 5px;
+  padding: 10px; }
+  .home div.name:last-child {
+    margin-right: 0; }
+  .home div.name label {
+    font-size: 1.2em; }
+  .home div.name input {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 65.88078%;
+    margin-left: 17.05961%;
+    margin-top: 10px; }
+    .home div.name input:last-child {
+      margin-right: 0; }
+
+.home .arena-wrapper {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 82.94039%;
+  margin-left: 8.5298%;
+  height: auto;
+  background-color: #f8f8f8;
+  margin-top: 20px;
+  border: 1px solid #F5F5F5;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 50px; }
+  .home .arena-wrapper:last-child {
+    margin-right: 0; }
+
+.home .cause {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 82.94039%;
+  margin-left: 8.5298%;
+  height: auto;
+  background-color: #f8f8f8;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #F5F5F5;
+  border-radius: 5px;
+  padding: 15px; }
+  .home .cause:last-child {
+    margin-right: 0; }
+  .home .cause .cause-third {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 31.76157%;
+    height: auto;
+    padding: 10px;
+    border: 1px solid #F5F5F5;
+    background-color: #F5F5F5;
+    border-radius: 5px;
+    transition: background-color 300ms ease-in; }
+    .home .cause .cause-third:last-child {
+      margin-right: 0; }
+    .home .cause .cause-third:hover {
+      background-color: gainsboro; }
+    .home .cause .cause-third img {
+      width: 90%;
+      height: auto; }
+  .home .cause footer {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 100%;
+    font-size: .8em;
+    color: #b5b5b5;
+    padding-top: 15px; }
+    .home .cause footer:last-child {
+      margin-right: 0; }
+    .home .cause footer img {
+      width: 50px;
+      height: auto; }
+
 .home ul {
   float: left;
   display: block;
@@ -122,3 +241,12 @@ header {
       height: 100%;
       width: 100%;
       display: block; }
+
+.home h2 {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%;
+  padding-top: 10px; }
+  .home h2:last-child {
+    margin-right: 0; }
