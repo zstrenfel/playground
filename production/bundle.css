@@ -17,6 +17,15 @@ html, body {
     html, body {
       padding: 0 5px; } }
 
+.default, .arena .player-zone {
+  height: auto;
+  background-color: #f8f8f8;
+  margin-top: 20px;
+  border: 1px solid #F5F5F5;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 50px; }
+
 h1, h2, h3, h4, h5 {
   font-family: "Open Sans", Helvetica, sans-serif;
   color: #202020;
@@ -113,6 +122,54 @@ footer.final {
 
 .swipe-leave.swipe-leave-active {
   opacity: 0.01; }
+
+.arena .timer-wrapper {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%;
+  height: auto;
+  text-align: right;
+  padding: 20px; }
+  .arena .timer-wrapper:last-child {
+    margin-right: 0; }
+  .arena .timer-wrapper .timer {
+    font-size: 1.2em; }
+    .arena .timer-wrapper .timer::before {
+      content: 'Time Remaining: ';
+      color: darkgray; }
+
+.arena .player-zone {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%;
+  background-color: #fff; }
+  .arena .player-zone:last-child {
+    margin-right: 0; }
+
+.arena .player {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%;
+  height: auto;
+  background-color: #F5F5F5; }
+  .arena .player:last-child {
+    margin-right: 0; }
+
+.arena .points, .arena .profile {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%; }
+  .arena .points:last-child, .arena .profile:last-child {
+    margin-right: 0; }
+
+.arena .points {
+  font-size: 2.5em;
+  font-weight: 600;
+  color: #6B6B6B; }
 
 .home div.name {
   float: left;

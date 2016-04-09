@@ -15,18 +15,24 @@ class Arena extends React.Component {
     super(props);
     this.state = {guess: "",
                   user:  "",
-                  opponent: "",
+                  opponent: "Geraldo",
                   room: "",
                   myScore: 0,
-                  opponentScore: 0}
+                  opponentScore: 0,
+                  timer: true,
+                  timeRemaing: 10000,
+                  isMounted: false,
+                }
     this.changeHandler = this.changeHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTime = this.handleTime.bind(this);
+    this.handleTimeEnd = this.handleTimeEnd.bind(this);
   }
   componentWillMount() {
     let pathname = this.props.location.pathname.split('/');
     let roomNum = (pathname[pathname.length-2]);
     let name = (pathname[pathname.length-1]);
-    this.setState({room: roomNum, user: name});
+    this.setState({room: roomNum, user: name, isMounted: true});
   }
   componentDidMount() {
     //set room
@@ -41,6 +47,9 @@ class Arena extends React.Component {
     socket.on('init', (opponent) => {
       this.setState({opponent: opponent})
     })
+  }
+  componentWillUnmount() {
+    this.setState({isMounted: false})
   }
 
   handleSubmit(e) {

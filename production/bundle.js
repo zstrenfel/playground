@@ -105,6 +105,10 @@ var _wordlistLevel = require('./wordlistLevel1.json');
 
 var _wordlistLevel2 = _interopRequireDefault(_wordlistLevel);
 
+var _countdownTimer = require('./countdownTimer');
+
+var _countdownTimer2 = _interopRequireDefault(_countdownTimer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -134,6 +138,18 @@ var Arena = function (_React$Component) {
       console.log("The below is g");
       console.log(g);
       this.setState({ guess: g });
+    }
+  }, {
+    key: 'handleTime',
+    value: function handleTime(time) {
+      if (this.state.timeRemaing - time >= 1000) {
+        this.setState({ timeRemaing: time });
+      }
+    }
+  }, {
+    key: 'handleTimeEnd',
+    value: function handleTimeEnd() {
+      console.log('timer is donw');
     }
   }, {
     key: 'render',
