@@ -27,22 +27,23 @@ app.use(cors({
   ]
 }));
 
+
 io.on('connection', function(socket){
   console.log('user connectd');
-  socket.on('init', (user) => {
-    console.log(user);
-    io.emit(user);
+  //on intialization of game
+  socket.on('init', (data) => {
+    socket.broadcast.to(data.room).emit('init', data.user);
+  })
+  //add to correct room
+  socket.on('join_room', (data) => {
+    socket.join(data.room);
   })
   //send message logic
   socket.on('push_message', (data) => {
-    socket.emit('pull_message', (data));
+    socket.broadcast.to(data.room).emit('pull_message', (data));
   })
+  //on
   socket.on('disconnect', function(){
-    console.log('a user disconnected');
-  });
-  socket.on('messageAdded', function(message) {
-    // io.emit('messageAdded', message); // broadcast to all clients
-    socket.broadcast.emit('messageAdded', message); // broadcast to all but the sender
   });
 })
 
