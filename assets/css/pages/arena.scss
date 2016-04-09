@@ -27,6 +27,7 @@
     @include span-columns(6);
     height: auto;
     background-color: $background-grey;
+    padding: 10px;
   }
 
   .points, .profile {
@@ -39,14 +40,36 @@
     color: #6B6B6B;
   }
 
+  .sponsor {
+    font-size: 1em;
+    color: #454545;
+    font-weight: 600;
+  }
+
+  .profile {
+    color: darken($background-grey, 30%);
+    font-size: .8em;
+    h3 {
+      font-size: 1.2em;
+      font-weight: 600em;
+    }
+  }
+
   .word {
     @include span-columns(4 of 12);
     height: 40px;
     font-size: 1.5em;
     border-bottom: 2px solid darken($background-grey, 3%);
+    text-align: left;
+    padding: 5px 7px;
+    transition: color 300ms ease-in;
 
-    &:nth-child(3) {
+    &:nth-of-type(3n) {
       @include omega;
+    }
+
+    &.found {
+      color: darken($background-grey, 20%);
     }
   }
 
@@ -63,6 +86,14 @@
     }
   }
 
+  .sponsor {
+    @include span-columns(12);
+    padding: 5px;
+  }
+  .synonyms-title {
+    color: darken($background-grey, 30%);
+  }
+
   .synonym-wrapper {
     @include span-columns(10);
     @include shift(1);
@@ -70,9 +101,20 @@
 
   }
 
-  .guessForm {
+  .block {
+    @extend .default;
     @include span-columns(10);
     @include shift(1);
+    display: none;
+
+    &.show {
+      display: initial;
+    }
+  }
+
+  .guessForm {
+    @include span-columns(6);
+    @include shift(3);
   }
 
   .welcome {
@@ -80,4 +122,15 @@
     font-size: 1.5em;
   }
 
+}
+
+
+
+.question-content {
+  display: none;
+
+
+  &.show {
+    display: initial;
+  }
 }

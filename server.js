@@ -34,9 +34,17 @@ io.on('connection', function(socket){
   socket.on('init', (data) => {
     socket.broadcast.to(data.room).emit('init', data.user);
   })
+  socket.on('give_name', (data) => {
+    socket.broadcast.to(data.room).emit('take_name', data.user);
+  })
   //add to correct room
   socket.on('join_room', (data) => {
     socket.join(data.room);
+  })
+
+  socket.on('tell_points', (data) => {
+    console.log('logging points', data.score);
+    socket.broadcast.to(data.room).emit('take_points', data.score);
   })
   //send message logic
   socket.on('push_message', (data) => {

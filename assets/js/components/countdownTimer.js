@@ -30,7 +30,6 @@ var CountdownTimer = React.createClass({
     tickCallback: React.PropTypes.func,
     completeCallback: React.PropTypes.func
   },
-
   getDefaultProps: function() {
     return {
       interval: 1000,
