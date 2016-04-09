@@ -22,6 +22,10 @@ class Word extends React.Component {
 		}
   }
 
+  handleGolden(word, active, golden) {
+  	this.props.handleState(word, active, golden);
+  }
+
 	render() {
 		
 		
@@ -40,7 +44,7 @@ class Word extends React.Component {
 		
 		if (this.state.goldenNum == true) {
 			if (this.props.found) {
-				//this.props.handlePoints(10);
+				//this.handleGolden(this.props.word, false, true);
 				return (
 					<div className="word found">
 						{this.props.word}
@@ -55,6 +59,7 @@ class Word extends React.Component {
 			}
 		} else {
 			if (this.props.found) {
+				this.handleGolden(this.props.word, false, false);
 				return (
 					<div className="word found">
 						{this.props.word}
