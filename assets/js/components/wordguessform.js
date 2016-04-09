@@ -24,7 +24,7 @@ class WordGuessForm extends React.Component {
 			<div className="guessForm">
 				<form className="guessForm" onSubmit={this.handleSubmit.bind(this)}>
                 	<input type="text" placeholder="Guess a word" value={this.state.guessedWord} onChange={this.handleGuessChange.bind(this)} />
-                	<input type="submit" value="Post" />
+                	<button> submit </button>
                 </form>
 			</div>
 		)

@@ -7,8 +7,9 @@ class Word extends React.Component {
   	super(props);
   	this.state = {time_elapsed:1};
   }
-  componentWillMount() {
-  	if (this.props.currentTime%10 == 0 && (Math.random() > .5)) {
+  componentWillReceiveProps() {
+  	console.log('mounting');
+  	if (this.props.currentTime%7 == 0 && (Math.random() > .5)) {
 			let l = this.state.time_elapsed + 1;
 			this.setState({time_elapsed: l });
 		}

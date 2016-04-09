@@ -91,6 +91,24 @@ footer.final {
   footer.final:last-child {
     margin-right: 0; }
 
+button {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%;
+  margin-top: 10px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #2574A9;
+  color: #E8E8E8;
+  font-size: 1.1em;
+  border: #206694;
+  cursor: pointer; }
+  button:last-child {
+    margin-right: 0; }
+  button:hover {
+    background-color: #1c577f; }
+
 @keyframes fade {
   0% {
     opacity: .1; }

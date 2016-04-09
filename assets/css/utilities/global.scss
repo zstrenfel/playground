@@ -85,3 +85,21 @@ footer.final {
   padding-top: 20px;
   border-top: 2px solid darken($background-grey, 10%);
 }
+
+
+button {
+  @include span-columns(12);
+  margin-top: 10px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: $blue;
+  color: #E8E8E8;
+  font-size: 1.1em;
+  border: darken($blue, 5%);
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($blue, 10%);
+  }
+
+}
