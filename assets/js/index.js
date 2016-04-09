@@ -9,7 +9,7 @@ import Arena from './components/arena'
 render (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Arena} />
+      <IndexRoute component={Home} />
       <Route path="/home" component={Home}/>
       <Route path="/arena/:arena/:name" component={Arena}/>
     </Route>
