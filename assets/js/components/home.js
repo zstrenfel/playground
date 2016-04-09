@@ -7,7 +7,7 @@ import Cause from './cause'
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {arenas: ArenaList.arenas, name:"", selected:""}
+    this.state = {arenas: ArenaList.arenas, name:"t", selected:""}
     this.handleChange = this.handleChange.bind(this);
   }
   getArenas() {

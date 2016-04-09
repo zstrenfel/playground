@@ -22,7 +22,7 @@ class Arena extends React.Component {
     this.state = {guess: "",
                   opponentGuess: "",
                   currentTime: 100,
-                  user:  "this",
+                  user:  "",
                   opponent: "",
                   room: "",
                   myScore: 0,
@@ -54,11 +54,10 @@ class Arena extends React.Component {
     let pathname = this.props.location.pathname.split('/');
     let roomNum = (pathname[pathname.length-2]);
     let name = (pathname[pathname.length-1]);
-    this.setState({room: roomNum, user: name, isMounted: true});
-    console.log(name, roomNum);
-    for (var i; i < data.synonyms.length; i++) {
-      synonyms.push({"word": data.synonyms[i], "active": true,});
-    }
+    let syns = data.synonyms.map((synonym) => {
+      return {word: synonym.syn, active: true};
+    });
+    this.setState({room: roomNum, user: name, isMounted: true, synonyms: syns});
   }
 
   //mostly for socket io
@@ -102,8 +101,23 @@ class Arena extends React.Component {
     clearInterval(this.interval);
   }
   handleGuessEntry(g) {
-    this.setState({guess: g})
-    socket.emit('push_message', {room: this.state.room, message: g});
+    let correct,
+        correctWords = this.state.correctWords;
+    let mapped = this.state.synonyms.map((synonym) => {
+      if (synonym.word === g) {
+        if (correctWords[g] == null) {
+          correct = [g, ...this.state.correctWords];
+          return {word: synonym.word, active: false};
+        }
+      }
+        return synonym;
+      })
+    if (correct) {
+      this.setState({synonyms:mapped, correctWords: correct});
+      socket.emit('push_message', {room: this.state.room, message: g});
+    } else {
+      this.setState({synonyms:mapped})
+    }
   }
   handleTimeEnd() {
     console.log('timer is done');
@@ -116,30 +130,16 @@ class Arena extends React.Component {
     this.setState({myScore: points})
     socket.emit('tell_points', {room: this.state.roomNum, score: points});
   }
-
-  var found = false;
-  var current_guess = this.state.guess;
-  var opponent_guess = this.state.opponentGuess;
-  var correctWords = this.state.correctWords;
-  var rows = [];
-  for (var i=0; i < data.synonyms.length; i++) {
-      if (current_guess == data.synonyms[i].syn && correctWords.indexOf(data.synonyms[i].syn) == -1) {
-        console.log('new word');
-        found = true;
-        correctWords.push(current_guess);
-        this.givePoints();
-      } else if (opponent_guess == data.synonyms[i].syn) {
-        found = true;
-        correctWords.push(current_guess);
-       } else if (correctWords.indexOf(data.synonyms[i].syn) >= 0) {
-        found = true;
-       } else {
-        found = false;
-       }
-       rows.push(<Word word={data.synonyms[i].syn} key={i} currentTime={data.currentTime} found={found}/>);
+  renderSynonyms() {
+    let rows = this.state.synonyms.map((s) => {
+        if (s !== undefined) {
+          return (<Word word={s.word} key={s.word} currentTime={data.currentTime} found={!s.active}/>)
+        }
+      })
+    return rows;
   }
-
   render() {
+    let rows = this.renderSynonyms();
     let opponent;
     if (this.state.opponent === "") {
       opponent = "Waiting..."
