@@ -71,10 +71,15 @@ class Arena extends React.Component {
     socket.emit('init', {user: this.state.user, room: this.state.room});
     //recieve message
     socket.on('pull_message', (data) => {
-      data = {opponentGuess: data.message};
-      let correct = [data.messge, ...this.state.correctWords];
-      this.setState({correctWords: correct});
-      this.handleGuessEntry(data.message);
+      console.log('recived pull');
+      let mapped = this.state.synonyms.map((synonym) => {
+      if (synonym.word === data.message) {
+          return {word: synonym.word, active: false};
+      }
+        return synonym;
+      });
+      data = {synonyms: mapped};
+      this.handleData(data);
     });
     socket.on('take_name', (user) => {
       data = {opponent: user, start: true};
@@ -88,9 +93,8 @@ class Arena extends React.Component {
       socket.emit('give_name', {user: this.state.user, room: this.state.room});
       this.interval = setInterval(this.tick, 1000);
     })
-    socket.on('take_points', (points) => {
-      console.log('taking points', points);
-      data = {opponentScore: points};
+    socket.on('take_points', (d) => {
+      data = {opponentScore: d.points};
       this.handleData(data);
     })
   }
@@ -102,19 +106,16 @@ class Arena extends React.Component {
     clearInterval(this.interval);
   }
   handleGuessEntry(g) {
-    let correct,
-        correctWords = this.state.correctWords;
+    let correct = false;
     let mapped = this.state.synonyms.map((synonym) => {
-      if (synonym.word === g) {
-        if (correctWords[g] == null) {
-          correct = [g, ...this.state.correctWords];
+      if (synonym.word === g && synonym.active) {
+          correct = true;
           return {word: synonym.word, active: false};
-        }
       }
         return synonym;
       })
     if (correct) {
-      this.setState({synonyms:mapped, correctWords: correct});
+      this.setState({synonyms:mapped});
       socket.emit('push_message', {room: this.state.room, message: g});
       this.givePoints();
     } else {
@@ -129,8 +130,8 @@ class Arena extends React.Component {
   }
   givePoints() {
     let points = Math.floor(2 * this.state.timeRemaining) + this.state.myScore;
+    socket.emit('tell_points', {room:this.state.roomNum, score: points});
     this.setState({myScore: points})
-    socket.emit('tell_points', {room: this.state.roomNum, score: points});
   }
   renderSynonyms() {
     let rows = this.state.synonyms.map((s) => {
