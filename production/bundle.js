@@ -36,6 +36,15 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'content' },
+        _react2.default.createElement(
+          'header',
+          null,
+          _react2.default.createElement(
+            'h1',
+            null,
+            'Playground'
+          )
+        ),
         this.props.children
       );
     }
@@ -203,11 +212,11 @@ var Home = function (_React$Component) {
       var arenas = this.getArenas();
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'home' },
         _react2.default.createElement(
-          'h1',
+          'h2',
           null,
-          'this is the home screen '
+          'Choose an Arena'
         ),
         _react2.default.createElement(
           'div',

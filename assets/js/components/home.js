@@ -19,8 +19,8 @@ class Home extends React.Component {
   render() {
     let arenas = this.getArenas();
     return (
-      <div>
-        <h1>this is the home screen </h1>
+      <div className="home">
+        <h2>Choose an Arena</h2>
         <div className="arena-list">
           <ul>
             {arenas}
