@@ -123,11 +123,29 @@ button {
   animation-timing-function: ease-in;
   animation-iteration-count: infinite; }
 
+.arena .word-wrapper {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%;
+  height: auto;
+  text-align: left;
+  padding: 20px;
+  overflow: auto; }
+  .arena .word-wrapper:last-child {
+    margin-right: 0; }
+  .arena .word-wrapper aside {
+    font-size: .8em; }
+    .arena .word-wrapper aside::before {
+      content: 'Defintion -- ';
+      color: darkgray; }
+
 .arena .timer-wrapper {
   float: left;
   display: block;
   margin-right: 2.35765%;
-  width: 100%;
+  width: 48.82117%;
+  margin-right: 0;
   height: auto;
   text-align: right;
   padding: 20px;
@@ -136,7 +154,7 @@ button {
     margin-right: 0; }
   .arena .timer-wrapper .timer {
     font-size: 1.2em;
-    padding-top: 14px; }
+    padding-top: 25px; }
     .arena .timer-wrapper .timer::before {
       content: 'Time Remaining: ';
       color: darkgray; }
@@ -224,7 +242,8 @@ button {
     margin-right: 0; }
 
 .arena .synonyms-title {
-  color: darkgray; }
+  color: darkgray;
+  display: inline; }
 
 .arena .synonym-wrapper {
   float: left;

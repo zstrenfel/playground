@@ -113,16 +113,20 @@ class Arena extends React.Component {
     return (
       <div className="arena">
         <div className={mainClasses}>
-          <div className="timer-wrapper">
-            <h2 className="left main-word">{data.word}</h2>
-            <div className='timer'>
-              {this.state.timeRemaining}
-            </div>
-          </div>
 
-          <h2 className="synonyms-title"> Synonyms: </h2>
-          <Synonyms givePoints={this.givePoints} synonyms={data.synonyms} guess={this.state.guess} opponentGuess={this.state.opponentGuess} currentTime={this.state.timeRemaining}/>
-          <WordGuessForm onGuessSubmit={this.handleGuessEntry}/>
+            <div className="word-wrapper">
+              <h2 className="main-word">{data.word}</h2>
+              <aside className="definition">{data.definition}</aside>
+            </div>
+            <div className="timer-wrapper">
+              <div className='timer'>
+                {this.state.timeRemaining}
+              </div>
+            </div>
+
+            <h2 className="synonyms-title"> Synonyms: </h2>
+            <Synonyms givePoints={this.givePoints} synonyms={data.synonyms} guess={this.state.guess} opponentGuess={this.state.opponentGuess} currentTime={this.state.timeRemaining}/>
+            <WordGuessForm onGuessSubmit={this.handleGuessEntry}/>
         </div>
         <div className={hiddenClasses}>
           <p className="fade">
