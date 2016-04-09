@@ -11,7 +11,7 @@ render (
     <Route path="/" component={App}>
       <IndexRoute component={Arena} />
       <Route path="/home" component={Home}/>
-      <Route path="/arena" component={Arena}/>
+      <Route path="/arena/:room" component={Arena}/>
     </Route>
   </Router>,
   document.getElementById('container')

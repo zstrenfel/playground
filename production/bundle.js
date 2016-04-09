@@ -174,15 +174,33 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Home = function (_React$Component) {
   _inherits(Home, _React$Component);
 
-  function Home() {
+  function Home(props) {
     _classCallCheck(this, Home);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Home).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Home).call(this, props));
+
+    _this.state = { arenas: ["Arena 1", "Arena 2", "Arena 3"] };
+    return _this;
   }
 
   _createClass(Home, [{
+    key: 'getArenas',
+    value: function getArenas() {
+      var arenaList = this.state.arenas.map(function (arena) {
+        return _react2.default.createElement(
+          'li',
+          null,
+          ' ',
+          arena,
+          ' '
+        );
+      });
+      return arenaList;
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var arenas = this.getArenas();
       return _react2.default.createElement(
         'div',
         null,
@@ -190,6 +208,15 @@ var Home = function (_React$Component) {
           'h1',
           null,
           'this is the home screen '
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'arena-list' },
+          _react2.default.createElement(
+            'ul',
+            null,
+            arenas
+          )
         )
       );
     }
