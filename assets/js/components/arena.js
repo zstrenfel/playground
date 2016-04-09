@@ -68,21 +68,20 @@ class Arena extends React.Component {
     this.state.currentTime -= 5;
     return (
       <div className="arena">
-        <h1>Welcome to the Arena, {this.state.user}!</h1>
         <div className="timer-wrapper">
+          <h2 className="left main-word">{data.word}</h2>
           <CountdownTimer start={this.state.timer}
                       initialTimeRemaining={10000}
                       completeCallback={this.handleTimeEnd}
                       />
         </div>
 
-        <h2> This is the main word </h2>
-        {data.word}
 
-        <h2> These are the synoyms to guess </h2>
+
+
+        <h2 > These are the synoyms to guess </h2>
         <Synonyms synonyms={data.synonyms} guess={this.state.guess} currentTime={this.state.currentTime}/>
 
-        <h2> This is the entry form </h2>
         <WordGuessForm onGuessSubmit={this.handleGuessEntry}/>
 
         <div className="player-zone">

@@ -16,13 +16,12 @@ class WordGuessForm extends React.Component {
 		e.preventDefault();
 		this.props.onGuessSubmit(this.state.guessedWord);
 		this.setState({guessedWord: ""});
-		
+
 	}
 
 	render() {
 		return (
 			<div className="guessForm">
-				<p>This is the users Word Guess</p>
 				<form className="guessForm" onSubmit={this.handleSubmit.bind(this)}>
                 	<input type="text" placeholder="Guess a word" value={this.state.guessedWord} onChange={this.handleGuessChange.bind(this)} />
                 	<input type="submit" value="Post" />

@@ -4,9 +4,11 @@
     height: auto;
     text-align: right;
     padding: 20px;
+    overflow: auto;
 
     .timer {
       font-size: 1.2em;
+      padding-top: 14px;
 
       &::before {
         content: 'Time Remaining: ';
@@ -35,6 +37,47 @@
     font-size: 2.5em;
     font-weight: 600;
     color: #6B6B6B;
+  }
+
+  .word {
+    @include span-columns(4 of 12);
+    height: 40px;
+    font-size: 1.5em;
+    border-bottom: 2px solid darken($background-grey, 3%);
+
+    &:nth-child(3) {
+      @include omega;
+    }
+  }
+
+  .main-word {
+    font-size: 2em;
+    font-weight: 600;
+    color: #C0392B;
+
+    &::before {
+      content: 'Word: ';
+      font-size: 1em;
+      font-weight: 300;
+      color: darken($background-grey, 30%);
+    }
+  }
+
+  .synonym-wrapper {
+    @include span-columns(10);
+    @include shift(1);
+    @extend .default;
+
+  }
+
+  .guessForm {
+    @include span-columns(10);
+    @include shift(1);
+  }
+
+  .welcome {
+    color: darken($background-grey, 30%);
+    font-size: 1.5em;
   }
 
 }

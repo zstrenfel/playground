@@ -15,13 +15,13 @@ class Word extends React.Component {
 		var modified_word = this.props.word.substring(0, this.state.time_elapsed);
 		if (this.props.found) {
 			return (
-				<div>
+				<div className="word found">
 					{this.props.word}
 				</div>
 			)
 		} else {
 			return (
-				<div>
+				<div className="word">
 					{modified_word}
 				</div>
 			)

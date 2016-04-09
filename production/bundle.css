@@ -17,7 +17,13 @@ html, body {
     html, body {
       padding: 0 5px; } }
 
-.default, .arena .player-zone {
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
+.default, .arena .player-zone, .arena .synonym-wrapper {
   height: auto;
   background-color: #f8f8f8;
   margin-top: 20px;
@@ -130,11 +136,13 @@ footer.final {
   width: 100%;
   height: auto;
   text-align: right;
-  padding: 20px; }
+  padding: 20px;
+  overflow: auto; }
   .arena .timer-wrapper:last-child {
     margin-right: 0; }
   .arena .timer-wrapper .timer {
-    font-size: 1.2em; }
+    font-size: 1.2em;
+    padding-top: 14px; }
     .arena .timer-wrapper .timer::before {
       content: 'Time Remaining: ';
       color: darkgray; }
@@ -170,6 +178,51 @@ footer.final {
   font-size: 2.5em;
   font-weight: 600;
   color: #6B6B6B; }
+
+.arena .word {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 31.76157%;
+  height: 40px;
+  font-size: 1.5em;
+  border-bottom: 2px solid #ededed; }
+  .arena .word:last-child {
+    margin-right: 0; }
+  .arena .word:nth-child(3) {
+    margin-right: 0; }
+
+.arena .main-word {
+  font-size: 2em;
+  font-weight: 600;
+  color: #C0392B; }
+  .arena .main-word::before {
+    content: 'Word: ';
+    font-size: 1em;
+    font-weight: 300;
+    color: darkgray; }
+
+.arena .synonym-wrapper {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 82.94039%;
+  margin-left: 8.5298%; }
+  .arena .synonym-wrapper:last-child {
+    margin-right: 0; }
+
+.arena .guessForm {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 82.94039%;
+  margin-left: 8.5298%; }
+  .arena .guessForm:last-child {
+    margin-right: 0; }
+
+.arena .welcome {
+  color: darkgray;
+  font-size: 1.5em; }
 
 .home div.name {
   float: left;

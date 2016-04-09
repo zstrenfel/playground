@@ -14,6 +14,14 @@ html, body {
   }
 }
 
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
 .default {
     height: auto;
     background-color: lighten($background-grey, 1%);

@@ -27,7 +27,7 @@ class Synonyms extends React.Component {
 	       rows.push(<Word word={this.props.synonyms[i].syn} key={i} currentTime={this.props.currentTime} found={found}/>);
 		}
 		return (
-			<div>
+			<div className="synonym-wrapper">
 				{rows}
 			</div>
 		);
