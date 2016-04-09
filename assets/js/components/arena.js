@@ -29,7 +29,9 @@ class Arena extends React.Component {
                   opponentScore: 0,
                   timeRemaining: 60,
                   isMounted: false,
-                  start: true
+                  start: true,
+                  synonyms: [],
+                  correctWords: []
                 };
     this.handleTick = this.handleTick.bind(this);
     this.handleTimeEnd = this.handleTimeEnd.bind(this);
@@ -54,6 +56,9 @@ class Arena extends React.Component {
     let name = (pathname[pathname.length-1]);
     this.setState({room: roomNum, user: name, isMounted: true});
     console.log(name, roomNum);
+    for (var i; i < data.synonyms.length; i++) {
+      synonyms.push({"word": data.synonyms[i], "active": true,});
+    }
   }
 
   //mostly for socket io
@@ -112,6 +117,28 @@ class Arena extends React.Component {
     socket.emit('tell_points', {room: this.state.roomNum, score: points});
   }
 
+  var found = false;
+  var current_guess = this.state.guess;
+  var opponent_guess = this.state.opponentGuess;
+  var correctWords = this.state.correctWords;
+  var rows = [];
+  for (var i=0; i < data.synonyms.length; i++) {
+      if (current_guess == data.synonyms[i].syn && correctWords.indexOf(data.synonyms[i].syn) == -1) {
+        console.log('new word');
+        found = true;
+        correctWords.push(current_guess);
+        this.givePoints();
+      } else if (opponent_guess == data.synonyms[i].syn) {
+        found = true;
+        correctWords.push(current_guess);
+       } else if (correctWords.indexOf(data.synonyms[i].syn) >= 0) {
+        found = true;
+       } else {
+        found = false;
+       }
+       rows.push(<Word word={data.synonyms[i].syn} key={i} currentTime={data.currentTime} found={found}/>);
+  }
+
   render() {
     let opponent;
     if (this.state.opponent === "") {
@@ -136,7 +163,9 @@ class Arena extends React.Component {
             </div>
 
             <h2 className="synonyms-title"> Synonyms: </h2>
-            <Synonyms givePoints={this.givePoints.bind(this)} synonyms={data.synonyms} guess={this.state.guess} opponentGuess={this.state.opponentGuess} currentTime={this.state.timeRemaining}/>
+            <div className="synonym-wrapper">
+              {rows}
+            </div>
             <WordGuessForm onGuessSubmit={this.handleGuessEntry}/>
         </div>
         <div className={hiddenClasses}>
