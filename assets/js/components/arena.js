@@ -9,6 +9,7 @@ import Synonyms from './synonyms'
 import WordGuessForm from './wordguessform'
 import Data from './wordlistLevel1.json'
 import emoji from 'node-emoji'
+import Player from './Player'
 
 
 var data = Data.data[0];
@@ -21,7 +22,7 @@ class Arena extends React.Component {
     this.state = {guess: "",
                   opponentGuess: "",
                   currentTime: 100,
-                  user:  "",
+                  user:  "this",
                   opponent: "",
                   room: "",
                   myScore: 0,
@@ -105,10 +106,6 @@ class Arena extends React.Component {
   handleTick(time) {
     console.log("time remaining: ", time);
   }
-  startGame() {
-    if (this.state.opponent === "") {
-    }
-  }
   givePoints() {
     let points = Math.floor(2 * this.state.timeRemaining) + this.state.myScore;
     this.setState({myScore: points})
@@ -148,25 +145,10 @@ class Arena extends React.Component {
             Waiting for someone else to join...
           </p>
         </div>
+
         <div className="player-zone">
-          <div className="player">
-            <div className="my-points points">{this.state.myScore}</div>
-            <div className="profile">
-              <h3>{this.state.user}</h3>
-              <div className="sponsor">
-                Sponsoring: Saparkul
-              </div>
-            </div>
-          </div>
-          <div className="player">
-            <div className="opponent-points points">{this.state.opponentScore}</div>
-            <div className="profile">
-              {opponent}
-              <div className="sponsor">
-                Sponsoring: Saparkul
-              </div>
-            </div>
-          </div>
+          <Player name={this.state.user} score={this.state.myScore} sponsor={'Saparkul'} />
+          <Player name={this.state.opponent} score={this.state.opponentScore} sponsor={'Saparkul'} />
         </div>
       </div>
     )
