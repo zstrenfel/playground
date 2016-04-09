@@ -1,17 +1,20 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { Link } from 'react-router';
+import ArenaList from '../../../ArenaList.json'
 
 
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {arenas: ["Arena 1", "Arena 2", "Arena 3"]};
+    this.state = {arenas: ArenaList.arenas }
   }
   getArenas() {
     let arenaList = this.state.arenas.map((arena) => {
+      let linkLocation = '/arena' + arena.altName
       return (
-        <li> {arena} </li>
+        <li><Link to={`/arena/${arena.altName}`}> {arena.arenaName} </Link></li>
       )
     })
     return arenaList;
