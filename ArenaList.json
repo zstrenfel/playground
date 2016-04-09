@@ -1,0 +1,14 @@
+{
+"arenas": [
+  { "arenaName":"Arena 1", "altName":"A1", "arenaNumber":1, "arenaFile":"Arenas/wordlistArena1.json"  },
+  { "arenaName":"Arena 2", "altName":"A2", "arenaNumber":2, "arenaFile":"Arenas/wordlistArena2.json"  },
+  { "arenaName":"Arena 3", "altName":"A3", "arenaNumber":3, "arenaFile":"Arenas/wordlistArena3.json"  },
+  { "arenaName":"Arena 4", "altName":"A4", "arenaNumber":4, "arenaFile":"Arenas/wordlistArena4.json"  },
+  { "arenaName":"Arena 5", "altName":"A5", "arenaNumber":5, "arenaFile":"Arenas/wordlistArena5.json"  },
+  { "arenaName":"Arena 6", "altName":"A6", "arenaNumber":6, "arenaFile":"Arenas/wordlistArena6.json"  },
+  { "arenaName":"Arena 7", "altName":"A7", "arenaNumber":7, "arenaFile":"Arenas/wordlistArena7.json"  },
+  { "arenaName":"Arena 8", "altName":"A8", "arenaNumber":8, "arenaFile":"Arenas/wordlistArena8.json"  },
+  { "arenaName":"Arena 9", "altName":"A9", "arenaNumber":9, "arenaFile":"Arenas/wordlistArena9.json"  },
+  { "arenaName":"Arena 10", "altName":"A10", "arenaNumber":10, "arenaFile":"Arenas/wordlistArena10.json"  }
+
+]}
