@@ -1,0 +1,40 @@
+.arena {
+  .timer-wrapper {
+    @include span-columns(12);
+    height: auto;
+    text-align: right;
+    padding: 20px;
+
+    .timer {
+      font-size: 1.2em;
+
+      &::before {
+        content: 'Time Remaining: ';
+        color: darken($background-grey, 30%);
+      }
+    }
+  }
+
+  .player-zone {
+    @include span-columns(12);
+    @extend .default;
+    background-color: #fff;
+  }
+
+  .player {
+    @include span-columns(6);
+    height: auto;
+    background-color: $background-grey;
+  }
+
+  .points, .profile {
+    @include span-columns(6);
+  }
+
+  .points {
+    font-size: 2.5em;
+    font-weight: 600;
+    color: #6B6B6B;
+  }
+
+}
