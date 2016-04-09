@@ -1,0 +1,56 @@
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    top: 70%;
+  }
+
+  to {
+    opacity: 1;
+    top: 50%;
+  }
+}
+
+.rise {
+  animation-name: rise;
+  animation-duration: 1.5s;
+
+  @include media($mobile) {
+    animation: none;
+  }
+}
+
+
+@keyframes slide-right {
+  from {
+    opacity: 0;
+    left: 100%;
+  }
+
+  to {
+    opacity: 1;
+    left: 0;
+
+  }
+}
+
+
+.swipe-appear {
+  opacity: 0.01;
+  transition-delay: 1s;
+  transition: opacity 600ms ease-in;
+}
+
+.swipe-appear.swipe-appear-active {
+  opacity: 1;
+}
+
+.swipe-leave {
+  opacity: 1;
+  transition: opacity 100ms ease-in;
+
+}
+
+.swipe-leave.swipe-leave-active {
+  opacity: 0.01;
+}

@@ -1,17 +1,30 @@
-/*eslint no-console:0 */
-'use strict';
-require('core-js/fn/object/assign');
-const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const config = require('./webpack.config');
-const open = require('open');
+// ==============================
+// server.js
+// ==============================
 
-new WebpackDevServer(webpack(config), config.devServer)
-.listen(config.port, 'localhost', (err) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log('Listening at localhost:' + config.port);
-  console.log('Opening your system browser...');
-  open('http://localhost:' + config.port + '/webpack-dev-server/');
+// modules ----------------------
+var express             = require('express');
+var path                = require('path');
+
+// Environment ------------------
+var env = process.env.NODE_ENV || 'development';
+var port = process.env.PORT || 8000;
+
+// Express Setup ----------------
+var app = express();
+var router = express.Router();
+
+// Static files -----------------
+app.use(express.static(__dirname + '/production'));
+
+// Routes -----------------------
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, './production', 'index.html'));
 });
+
+// Launch app -------------------
+//app.listen(port);
+app.listen(port);
+//app.listen(port, '10.134.0.227');
+console.log("*** server running");
+exports = module.exports = app;
