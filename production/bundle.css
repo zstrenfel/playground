@@ -220,6 +220,8 @@ button {
     margin-right: 0; }
   .arena .word.found {
     color: #c2c2c2; }
+  .arena .word.golden {
+    color: #CFB53B; }
 
 .arena .main-word {
   font-size: 2em;

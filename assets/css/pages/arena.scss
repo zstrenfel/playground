@@ -88,6 +88,10 @@
     &.found {
       color: darken($background-grey, 20%);
     }
+
+    &.golden {
+      color: #CFB53B;
+    }
   }
 
   .main-word {
