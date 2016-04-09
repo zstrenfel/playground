@@ -4,9 +4,10 @@ import { render } from 'react-dom'
 
 
 class Arena extends React.Component {
+
   render() {
     return (
-      <div>
+      <div className="arena">
         <h1>this is the arena screen </h1>
       </div>
     );

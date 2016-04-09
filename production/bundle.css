@@ -25,13 +25,27 @@ h1, h2, h3, h4, h5 {
   font-weight: 300; }
 
 .container {
-  max-width: 1200;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto; }
   .container::after {
     clear: both;
     content: "";
     display: table; }
+
+header {
+  height: 120px;
+  width: 100%;
+  background-color: #F5F5F5;
+  text-align: center;
+  padding-top: 40px;
+  border-bottom: 2px solid gainsboro; }
+  header h1 {
+    color: #454545; }
+
+.home, .arena {
+  padding: 20px;
+  text-align: center; }
 
 @keyframes rise {
   from {
@@ -70,3 +84,35 @@ h1, h2, h3, h4, h5 {
 
 .swipe-leave.swipe-leave-active {
   opacity: 0.01; }
+
+.home ul {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 82.94039%;
+  margin-left: 8.5298%;
+  height: auto;
+  list-style-type: none;
+  padding: 0; }
+  .home ul:last-child {
+    margin-right: 0; }
+  .home ul li {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 100%;
+    display: block;
+    height: 50px;
+    background-color: #c2c2c2;
+    color: #34495E;
+    margin: 10px auto;
+    border-radius: 5px;
+    border: 2px solid #b5b5b5;
+    line-height: 40px;
+    font-size: 1.2em;
+    transition: background-color 300ms ease-in; }
+    .home ul li:last-child {
+      margin-right: 0; }
+    .home ul li:hover {
+      background-color: darkgray;
+      border: 2px solid #9c9c9c; }
