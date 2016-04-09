@@ -9,6 +9,7 @@ import Synonyms from './synonyms'
 import WordGuessForm from './wordguessform'
 import Data from './wordlistLevel1.json'
 import emoji from 'node-emoji'
+import Player from './Player'
 
 
 var data = Data.data[0];
@@ -22,7 +23,7 @@ class Arena extends React.Component {
                   opponentGuess: "",
                   currentTime: 100,
                   user:  "",
-                  opponent: "",
+                  opponent: "jebus",
                   room: "",
                   myScore: 0,
                   opponentScore: 0,
@@ -53,18 +54,17 @@ class Arena extends React.Component {
     let pathname = this.props.location.pathname.split('/');
     let roomNum = (pathname[pathname.length-2]);
     let name = (pathname[pathname.length-1]);
-    this.setState({room: roomNum, user: name, isMounted: true});
-    console.log(name, roomNum);
-    for (var i; i < data.synonyms.length; i++) {
-      synonyms.push({"word": data.synonyms[i], "active": true,});
-    }
+    let syns = data.synonyms.map((synonym) => {
+      return {word: synonym.syn, active: true};
+    });
+    this.setState({room: roomNum, user: name, isMounted: true, synonyms: syns});
   }
 
   //mostly for socket io
   componentDidMount() {
     let data;
     //commment this out later
-    this.interval = setInterval(this.tick, 1000);
+    // this.interval = setInterval(this.tick, 1000);
     //set room
     socket.emit('join_room', {room: this.state.room })
     //send user data
@@ -72,14 +72,15 @@ class Arena extends React.Component {
     //recieve message
     socket.on('pull_message', (data) => {
       data = {opponentGuess: data.message};
-      this.handleData(data);
+      let correct = [data.messge, ...this.state.correctWords];
+      this.setState({correctWords: correct});
+      this.handleGuessEntry(data.message);
     });
     socket.on('take_name', (user) => {
       data = {opponent: user, start: true};
       this.handleData(data);
       this.interval = setInterval(this.tick, 1000);
     })
-
     //recieve user data
     socket.on('init', (user) => {
       data = {opponent: user, start: true};
@@ -101,8 +102,24 @@ class Arena extends React.Component {
     clearInterval(this.interval);
   }
   handleGuessEntry(g) {
-    this.setState({guess: g})
-    socket.emit('push_message', {room: this.state.room, message: g});
+    let correct,
+        correctWords = this.state.correctWords;
+    let mapped = this.state.synonyms.map((synonym) => {
+      if (synonym.word === g) {
+        if (correctWords[g] == null) {
+          correct = [g, ...this.state.correctWords];
+          return {word: synonym.word, active: false};
+        }
+      }
+        return synonym;
+      })
+    if (correct) {
+      this.setState({synonyms:mapped, correctWords: correct});
+      socket.emit('push_message', {room: this.state.room, message: g});
+      this.givePoints();
+    } else {
+      this.setState({synonyms:mapped})
+    }
   }
   handleTimeEnd() {
     console.log('timer is done');
@@ -110,38 +127,21 @@ class Arena extends React.Component {
   handleTick(time) {
     console.log("time remaining: ", time);
   }
-  startGame() {
-    if (this.state.opponent === "") {
-    }
-  }
-  givePoints(goldenGuess) {
+  givePoints() {
     let points = Math.floor(2 * this.state.timeRemaining) + this.state.myScore;
     this.setState({myScore: points})
     socket.emit('tell_points', {room: this.state.roomNum, score: points});
   }
-
+  renderSynonyms() {
+    let rows = this.state.synonyms.map((s) => {
+        if (s !== undefined) {
+          return (<Word word={s.word} key={s.word} currentTime={data.currentTime} found={!s.active}/>)
+        }
+      })
+    return rows;
+  }
   render() {
-    var found = false;
-    var current_guess = this.state.guess;
-    var opponent_guess = this.state.opponentGuess;
-    var correctWords = this.state.correctWords;
-    var rows = [];
-    for (var i=0; i < data.synonyms.length; i++) {
-        if (current_guess == data.synonyms[i].syn && correctWords.indexOf(data.synonyms[i].syn) == -1) {
-          console.log('new word');
-          found = true;
-          correctWords.push(current_guess);
-          this.givePoints(0);
-        } else if (opponent_guess == data.synonyms[i].syn) {
-          found = true;
-          correctWords.push(current_guess);
-         } else if (correctWords.indexOf(data.synonyms[i].syn) >= 0) {
-          found = true;
-         } else {
-          found = false;
-         }
-         rows.push(<Word word={data.synonyms[i].syn} key={i} currentTime={this.state.timeRemaining} found={found} handlePoints={this.givePoints}/>);
-    }
+    let rows = this.renderSynonyms();
     let opponent;
     if (this.state.opponent === "") {
       opponent = "Waiting..."
@@ -176,25 +176,10 @@ class Arena extends React.Component {
             Waiting for someone else to join...
           </p>
         </div>
+
         <div className="player-zone">
-          <div className="player">
-            <div className="my-points points">{this.state.myScore}</div>
-            <div className="profile">
-              <h3>{this.state.user}</h3>
-              <div className="sponsor">
-                Sponsoring: Saparkul
-              </div>
-            </div>
-          </div>
-          <div className="player">
-            <div className="opponent-points points">{this.state.opponentScore}</div>
-            <div className="profile">
-              {opponent}
-              <div className="sponsor">
-                Sponsoring: Saparkul
-              </div>
-            </div>
-          </div>
+          <Player name={this.state.user} score={this.state.myScore} sponsor={'Saparkul'} />
+          <Player name={this.state.opponent} score={this.state.opponentScore} sponsor={'Saparkul'} />
         </div>
       </div>
     )

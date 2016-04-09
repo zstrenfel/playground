@@ -51,7 +51,6 @@ h1, h2, h3, h4, h5 {
 header {
   height: 120px;
   width: 100%;
-  background-color: #F5F5F5;
   text-align: center;
   padding-top: 40px;
   border-bottom: 2px solid gainsboro; }
@@ -350,6 +349,10 @@ button {
     transition: background-color 300ms ease-in; }
     .home .cause .cause-third:last-child {
       margin-right: 0; }
+    .home .cause .cause-third aside {
+      padding: 5px;
+      text-align: left;
+      font-size: .8em; }
     .home .cause .cause-third:hover {
       background-color: gainsboro; }
     .home .cause .cause-third img {

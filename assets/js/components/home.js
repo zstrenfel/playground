@@ -2,11 +2,12 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router';
 import ArenaList from '../../../ArenaList.json'
+import Cause from './cause'
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {arenas: ArenaList.arenas, name:"" }
+    this.state = {arenas: ArenaList.arenas, name:"t", selected:""}
     this.handleChange = this.handleChange.bind(this);
   }
   getArenas() {
@@ -33,18 +34,9 @@ class Home extends React.Component {
         <div className="cause">
           <h2> Choose a Cause </h2>
           <div className="cause wrapper">
-            <div className="cause-third">
-              <img src={'./imgs/saparkul.jpg'} />
-              <h3>Saparkul</h3>
-            </div>
-            <div className="cause-third">
-              <img src={'./imgs/sergio.jpg'} />
-              <h3>Sergio</h3>
-            </div>
-            <div className="cause-third">
-              <img src={'./imgs/yazan.jpg'} />
-              <h3>Yazan</h3>
-            </div>
+            <Cause name={'Saparkul'} src={'./imgs/saparkul.jpg'} location={'Peru'} story={'A loan of $350 helps Saparkul to buy feed and vitamins for her pigs.'}/>
+            <Cause name={'Yazan'} src={'./imgs/yazan.jpg'} location={'Russia'} story={'A loan of $2,350 helps Yazan to buy a new play station device for his internet cafe.'}/>
+            <Cause name={'Sergio'} src={'./imgs/sergio.jpg'} location={'Gutamala'} story={'A loan of $900 helps Sergio to purchase more refrigerators for resale. '}/>
           </div>
           <footer> sponsored by <img src={'./imgs/kiva.png'} /></footer>
         </div>
