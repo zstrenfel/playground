@@ -24,6 +24,7 @@ class Synonyms extends React.Component {
 		var rows = [];
 		for (var i=0; i < this.props.synonyms.length; i++) {
 		    if (current_guess == this.props.synonyms[i].syn && correctWords.indexOf(this.props.synonyms[i].syn) == -1) {
+		    	console.log('new word');
 		    	found = true;
 		    	correctWords.push(current_guess);
 		    	this.handlePoints();

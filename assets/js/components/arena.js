@@ -28,13 +28,14 @@ class Arena extends React.Component {
                   opponentScore: 0,
                   timeRemaining: 60,
                   isMounted: false,
-                  start: true,
+                  start: true
                 };
     this.handleTick = this.handleTick.bind(this);
     this.handleTimeEnd = this.handleTimeEnd.bind(this);
     this.handleGuessEntry = this.handleGuessEntry.bind(this);
     this.tick = this.tick.bind(this);
     this.givePoints = this.givePoints.bind(this);
+    this.handleData = this.handleData.bind(this);
   }
 
   /** Timer function */
@@ -51,35 +52,44 @@ class Arena extends React.Component {
     let roomNum = (pathname[pathname.length-2]);
     let name = (pathname[pathname.length-1]);
     this.setState({room: roomNum, user: name, isMounted: true});
+    console.log(name, roomNum);
   }
 
   //mostly for socket io
   componentDidMount() {
+    let data;
     //commment this out later
     this.interval = setInterval(this.tick, 1000);
     //set room
     socket.emit('join_room', {room: this.state.room })
-    //recieve message
-    socket.on('pull_message', (data) => {
-      console.log('message recived', data);
-      this.setState({opponentGuess: data.message})
-    });
-    socket.on('take_name', (opponent) => {
-      this.setState({opponent: opponent, start: true})
-      this.interval = setInterval(this.tick, 1000);
-    })
     //send user data
     socket.emit('init', {user: this.state.user, room: this.state.room});
+    //recieve message
+    socket.on('pull_message', (data) => {
+      data = {opponentGuess: data.message};
+      this.handleData(data);
+    });
+    socket.on('take_name', (user) => {
+      data = {opponent: user, start: true};
+      this.handleData(data);
+      this.interval = setInterval(this.tick, 1000);
+    })
+
     //recieve user data
-    socket.on('init', (opponent) => {
-      this.setState({opponent: opponent, start: true})
+    socket.on('init', (user) => {
+      data = {opponent: user, start: true};
+      this.handleData(data);
       socket.emit('give_name', {user: this.state.user, room: this.state.room});
       this.interval = setInterval(this.tick, 1000);
     })
     socket.on('take_points', (points) => {
-      console.log(points);
-      this.setState({opponentScore: points})
+      console.log('taking points', points);
+      data = {opponentScore: points};
+      this.handleData(data);
     })
+  }
+  handleData(data) {
+    this.setState(data, () => {console.log("added data", data)});
   }
   componentWillUnmount() {
     this.setState({isMounted: false});
@@ -101,13 +111,17 @@ class Arena extends React.Component {
   }
   givePoints() {
     let points = Math.floor(2 * this.state.timeRemaining) + this.state.myScore;
-    console.log('points', points);
     this.setState({myScore: points})
     socket.emit('tell_points', {room: this.state.roomNum, score: points});
   }
 
   render() {
-    let opponent = this.state.opponent !== "" ? () => {return (<h3>this.state.opponent</h3>)} : "Waiting for opponent..."
+    let opponent;
+    if (this.state.opponent === "") {
+      opponent = "Waiting..."
+    } else {
+      opponent = this.state.opponent
+    }
     let mainClasses = classNames('question-content', {show: this.state.start});
     let hiddenClasses = classNames('block', {show: !this.state.start});
     return (
@@ -125,7 +139,7 @@ class Arena extends React.Component {
             </div>
 
             <h2 className="synonyms-title"> Synonyms: </h2>
-            <Synonyms givePoints={this.givePoints} synonyms={data.synonyms} guess={this.state.guess} opponentGuess={this.state.opponentGuess} currentTime={this.state.timeRemaining}/>
+            <Synonyms givePoints={this.givePoints.bind(this)} synonyms={data.synonyms} guess={this.state.guess} opponentGuess={this.state.opponentGuess} currentTime={this.state.timeRemaining}/>
             <WordGuessForm onGuessSubmit={this.handleGuessEntry}/>
         </div>
         <div className={hiddenClasses}>

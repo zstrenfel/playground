@@ -291,10 +291,8 @@ button {
   width: 65.88078%;
   margin-left: 17.05961%;
   height: auto;
-  background-color: #f8f8f8;
   margin-top: 20px;
   margin-bottom: 20px;
-  border: 1px solid #F5F5F5;
   border-radius: 5px;
   padding: 10px; }
   .home div.name:last-child {
@@ -318,9 +316,7 @@ button {
   width: 82.94039%;
   margin-left: 8.5298%;
   height: auto;
-  background-color: #f8f8f8;
   margin-top: 20px;
-  border: 1px solid #F5F5F5;
   border-radius: 5px;
   padding: 15px;
   margin-bottom: 50px; }
@@ -334,10 +330,8 @@ button {
   width: 82.94039%;
   margin-left: 8.5298%;
   height: auto;
-  background-color: #f8f8f8;
   margin-top: 20px;
   margin-bottom: 20px;
-  border: 1px solid #F5F5F5;
   border-radius: 5px;
   padding: 15px; }
   .home .cause:last-child {
@@ -349,7 +343,6 @@ button {
     width: 31.76157%;
     height: auto;
     padding: 10px;
-    border: 1px solid #F5F5F5;
     background-color: #F5F5F5;
     border-radius: 5px;
     transition: background-color 300ms ease-in; }
@@ -392,22 +385,21 @@ button {
     width: 100%;
     display: block;
     height: 50px;
-    background-color: #c2c2c2;
-    color: #34495E;
+    color: #674172;
     margin: 10px auto;
     border-radius: 5px;
-    border: 2px solid #b5b5b5;
+    border: 2px solid #f0f0f0;
     line-height: 45px;
     font-size: 1.2em;
     transition: background-color 300ms ease-in; }
     .home ul li:last-child {
       margin-right: 0; }
     .home ul li:hover {
-      background-color: darkgray;
-      border: 2px solid #9c9c9c; }
+      background-color: #f2f2f2;
+      border: 2px solid #e8e8e8; }
     .home ul li a {
       text-decoration: none;
-      color: #34495E;
+      color: #BDC3C7;
       height: 100%;
       width: 100%;
       display: block; }

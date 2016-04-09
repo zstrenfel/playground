@@ -8,6 +8,9 @@ class Word extends React.Component {
   	this.state = {time_elapsed:1};
   }
   componentWillReceiveProps() {
+    if (this.props.currentTime == 0) {
+      return;
+    }
   	if (this.props.currentTime%7 == 0 && (Math.random() > .5)) {
 			let l = this.state.time_elapsed + 1;
 			this.setState({time_elapsed: l });

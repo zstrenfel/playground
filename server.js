@@ -43,7 +43,8 @@ io.on('connection', function(socket){
   })
 
   socket.on('tell_points', (data) => {
-    console.log('logging points', data.score);
+
+    console.log('logging points', data);
     socket.broadcast.to(data.room).emit('take_points', data.score);
   })
   //send message logic
