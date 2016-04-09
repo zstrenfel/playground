@@ -114,35 +114,34 @@ class Arena extends React.Component {
     if (this.state.opponent === "") {
     }
   }
-  givePoints() {
+  givePoints(goldenGuess) {
     let points = Math.floor(2 * this.state.timeRemaining) + this.state.myScore;
     this.setState({myScore: points})
     socket.emit('tell_points', {room: this.state.roomNum, score: points});
   }
 
-  var found = false;
-  var current_guess = this.state.guess;
-  var opponent_guess = this.state.opponentGuess;
-  var correctWords = this.state.correctWords;
-  var rows = [];
-  for (var i=0; i < data.synonyms.length; i++) {
-      if (current_guess == data.synonyms[i].syn && correctWords.indexOf(data.synonyms[i].syn) == -1) {
-        console.log('new word');
-        found = true;
-        correctWords.push(current_guess);
-        this.givePoints();
-      } else if (opponent_guess == data.synonyms[i].syn) {
-        found = true;
-        correctWords.push(current_guess);
-       } else if (correctWords.indexOf(data.synonyms[i].syn) >= 0) {
-        found = true;
-       } else {
-        found = false;
-       }
-       rows.push(<Word word={data.synonyms[i].syn} key={i} currentTime={data.currentTime} found={found}/>);
-  }
-
   render() {
+    var found = false;
+    var current_guess = this.state.guess;
+    var opponent_guess = this.state.opponentGuess;
+    var correctWords = this.state.correctWords;
+    var rows = [];
+    for (var i=0; i < data.synonyms.length; i++) {
+        if (current_guess == data.synonyms[i].syn && correctWords.indexOf(data.synonyms[i].syn) == -1) {
+          console.log('new word');
+          found = true;
+          correctWords.push(current_guess);
+          this.givePoints(0);
+        } else if (opponent_guess == data.synonyms[i].syn) {
+          found = true;
+          correctWords.push(current_guess);
+         } else if (correctWords.indexOf(data.synonyms[i].syn) >= 0) {
+          found = true;
+         } else {
+          found = false;
+         }
+         rows.push(<Word word={data.synonyms[i].syn} key={i} currentTime={this.state.timeRemaining} found={found} handlePoints={this.givePoints}/>);
+    }
     let opponent;
     if (this.state.opponent === "") {
       opponent = "Waiting..."
