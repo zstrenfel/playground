@@ -32,7 +32,7 @@ gulp.task('browser-sync', ['nodemon'], function() {
     browser: "firefox",
     ws: true,
     port: 7000,
-    online: true
+    online: false
   });
 })
 

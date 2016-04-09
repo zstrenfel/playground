@@ -23,7 +23,7 @@ class Arena extends React.Component {
                   opponentGuess: "",
                   currentTime: 100,
                   user:  "",
-                  opponent: "",
+                  opponent: "jebus",
                   room: "",
                   myScore: 0,
                   opponentScore: 0,
@@ -64,7 +64,7 @@ class Arena extends React.Component {
   componentDidMount() {
     let data;
     //commment this out later
-    this.interval = setInterval(this.tick, 1000);
+    // this.interval = setInterval(this.tick, 1000);
     //set room
     socket.emit('join_room', {room: this.state.room })
     //send user data
@@ -72,14 +72,15 @@ class Arena extends React.Component {
     //recieve message
     socket.on('pull_message', (data) => {
       data = {opponentGuess: data.message};
-      this.handleData(data);
+      let correct = [data.messge, ...this.state.correctWords];
+      this.setState({correctWords: correct});
+      this.handleGuessEntry(data.message);
     });
     socket.on('take_name', (user) => {
       data = {opponent: user, start: true};
       this.handleData(data);
       this.interval = setInterval(this.tick, 1000);
     })
-
     //recieve user data
     socket.on('init', (user) => {
       data = {opponent: user, start: true};
@@ -115,6 +116,7 @@ class Arena extends React.Component {
     if (correct) {
       this.setState({synonyms:mapped, correctWords: correct});
       socket.emit('push_message', {room: this.state.room, message: g});
+      this.givePoints();
     } else {
       this.setState({synonyms:mapped})
     }
