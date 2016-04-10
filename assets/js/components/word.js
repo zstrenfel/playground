@@ -16,21 +16,20 @@ class Word extends React.Component {
 			let l = this.state.time_elapsed + 1;
 			var randomNum = Math.floor(Math.random()*100);
 			this.setState({time_elapsed: l, goldenNum: false});
-			if (randomNum%2 == 0) {
+			if (randomNum%5 == 0) {
 				this.setState({time_elapsed: l, goldenNum: true});
 			}
 		}
   }
 
   handleGolden(word, active, golden) {
-  	this.props.handleState(word, active, golden);
   }
 
 	render() {
-		
-		
+
+
 		var modified_word = this.props.word.substring(0, this.state.time_elapsed);
-		
+
 		var num_us = this.props.word.length - modified_word.length;
 		var list_us = [];
 		var index = 0;
@@ -41,10 +40,10 @@ class Word extends React.Component {
 		var str_us = list_us.join(" ");
 		modified_word = modified_word.concat(str_us);
 
-		
+
 		if (this.state.goldenNum == true) {
 			if (this.props.found) {
-				//this.handleGolden(this.props.word, false, true);
+				// this.handleGolden(this.props.word, false, true);
 				return (
 					<div className="word found">
 						{this.props.word}
@@ -59,7 +58,6 @@ class Word extends React.Component {
 			}
 		} else {
 			if (this.props.found) {
-				this.handleGolden(this.props.word, false, false);
 				return (
 					<div className="word found">
 						{this.props.word}

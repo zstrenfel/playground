@@ -112,6 +112,10 @@
     padding: 5px;
   }
   .synonyms-title {
+    @include span-columns(12);
+    text-align: center;
+    padding: 0;
+    margin: 0;
     color: darken($background-grey, 30%);
     display: inline;
   }
@@ -120,7 +124,7 @@
     @include span-columns(10);
     @include shift(1);
     @extend .default;
-
+    margin-top: 10px;
   }
 
   .block {

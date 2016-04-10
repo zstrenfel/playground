@@ -23,7 +23,7 @@ class Arena extends React.Component {
                   opponentGuess: "",
                   currentTime: 100,
                   user:  "",
-                  opponent: "jebus",
+                  opponent: "james",
                   room: "",
                   myScore: 0,
                   opponentScore: 0,
@@ -64,7 +64,7 @@ class Arena extends React.Component {
   componentDidMount() {
     let data;
     //commment this out later
-    // this.interval = setInterval(this.tick, 1000);
+    this.interval = setInterval(this.tick, 1000);
     //set room
     socket.emit('join_room', {room: this.state.room })
     //send user data
@@ -136,7 +136,7 @@ class Arena extends React.Component {
   renderSynonyms() {
     let rows = this.state.synonyms.map((s) => {
         if (s !== undefined) {
-          return (<Word word={s.word} key={s.word} currentTime={data.currentTime} found={!s.active}/>)
+          return (<Word word={s.word} key={s.word} currentTime={this.state.timeRemaining} found={!s.active}/>)
         }
       })
     return rows;
@@ -165,7 +165,9 @@ class Arena extends React.Component {
               </div>
             </div>
 
-            <h2 className="synonyms-title"> Synonyms: </h2>
+            <div className="synonyms-title">
+              <h2> Synonyms: </h2>
+            </div>
             <div className="synonym-wrapper">
               {rows}
             </div>

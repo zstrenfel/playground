@@ -6,10 +6,7 @@ let Player = ({ score, name, sponsor }) => {
     <div className="player">
       <div className="my-points points">{score}</div>
       <div className="profile">
-        <h3>{name}</h3>
-        <div className="sponsor">
-          Sponsoring: {sponsor}
-        </div>
+        <h2>{name}</h2>
       </div>
     </div>
     )
