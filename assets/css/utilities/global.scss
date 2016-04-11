@@ -104,6 +104,11 @@ footer.final {
   color: darken($background-grey, 20%);
   border-top: 1.5px solid darken($background-grey, 5%);
   padding-top: 15px;
+
+  a {
+    color: #59ABE3;
+    text-decoration: none;
+  }
 }
 
 

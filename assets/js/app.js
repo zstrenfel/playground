@@ -10,7 +10,8 @@ class App extends React.Component {
       <div className="content">
         {this.props.children}
       <footer className="final">
-        Made with {emoji.get('coffee')} & {emoji.get('heart')} by Zach & Sachal. Check out the repository <a href="#">here</a>.
+        Made with {emoji.get('coffee')} & {emoji.get('heart')} by Zach & Sachal. Check out the repository
+        <a href="https://github.com/zstrenfel/playground">here</a>.
       </footer>
       </div>
     )
