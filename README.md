@@ -12,7 +12,8 @@ Created for Big Think Hackathon 2016 by [Zach Strenfel](https://github.com/zstre
 
 ## Description
 
-Wordlike Playground extends Quill's single-player game Wordlike into a two-player game that creates incentives for kids to play.
+Wordlike Playground extends Quill's single-player game [Wordlike](http://wordlike.org/) into a two-player game that creates incentives for kids to play.
+
 
 ##Build
 
