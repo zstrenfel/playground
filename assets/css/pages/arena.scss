@@ -14,6 +14,10 @@
       }
     }
   }
+
+  .arena-list {
+    overflow: auto;
+  }
   .timer-wrapper {
     @include span-columns(6);
     @include omega;
@@ -45,6 +49,8 @@
     height: auto;
     background-color: $background-grey;
     padding: 10px;
+
+
   }
 
   .points, .profile {
@@ -55,6 +61,13 @@
     font-size: 2.5em;
     font-weight: 600;
     color: #6B6B6B;
+    &.winning {
+      color: #80985B;
+    }
+
+    &.losing {
+      color: #CA848D;
+    }
   }
 
   .sponsor {

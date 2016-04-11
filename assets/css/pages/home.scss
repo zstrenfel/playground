@@ -1,5 +1,6 @@
 .home {
-
+  overflow: auto;
+  padding: 0 auto;
 
   div.name {
     @include span-columns(8);
@@ -7,8 +8,8 @@
 
     height: auto;
     // background-color: lighten($background-grey, 1%);
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-bottom: 10px;
     // border: 1px solid $background-grey;
     border-radius: 5px;
     padding: 10px;
@@ -26,6 +27,7 @@
 
   }
 
+
   .arena-wrapper {
    @include span-columns(10);
     @include shift(1);
@@ -36,7 +38,7 @@
     // border: 1px solid $background-grey;
     border-radius: 5px;
     padding: 15px;
-    margin-bottom: 40px;
+    margin-bottom: 0;
 
   }
 
@@ -96,6 +98,7 @@
     height: auto;
     list-style-type: none;
     padding: 0;
+    margin-bottom: 0;
 
 
     li {
@@ -118,7 +121,7 @@
 
       a {
         text-decoration: none;
-        color: #979797;
+        color: #757776;
         height: 100%;
         width: 100%;
         display: block;

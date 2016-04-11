@@ -2,12 +2,15 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router';
 import ArenaList from '../../../ArenaList.json'
-import Cause from './cause'
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {arenas: ArenaList.arenas, name:"", selected:""}
+    this.state = {
+      arenas: ArenaList.arenas,
+      name:"",
+      selected:""
+    }
     this.handleChange = this.handleChange.bind(this);
   }
   getArenas() {
@@ -27,6 +30,10 @@ class Home extends React.Component {
     let arenas = this.getArenas();
     return (
       <div className="home">
+        <header>
+          <img src={'./imgs/wp.png'} alt="Wordlike Playground"/>
+          <h1> Wordlike Playground </h1>
+        </header>
         <div className="name">
           <h2> Enter Your Name </h2>
           <input onChange={this.handleChange} value={this.state.name}/>

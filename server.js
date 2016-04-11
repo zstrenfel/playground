@@ -16,9 +16,9 @@ var express = require('express');
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var socket = require('./socket');
 
 server.listen(port);
-
 
 //allows CORs
 app.use(cors({
@@ -27,34 +27,8 @@ app.use(cors({
   ]
 }));
 
-
-io.on('connection', function(socket){
-  console.log('user connectd');
-  //on intialization of game
-  socket.on('init', (data) => {
-    socket.broadcast.to(data.room).emit('init', data.user);
-  })
-  socket.on('give_name', (data) => {
-    socket.broadcast.to(data.room).emit('take_name', data.user);
-  })
-  //add to correct room
-  socket.on('join_room', (data) => {
-    socket.join(data.room);
-  })
-
-  socket.on('tell_points', (data) => {
-    console.log('logging points', data);
-    socket.broadcast.to(data.room).emit('take_points', data);
-  })
-  //send message logic
-  socket.on('push_message', (data) => {
-    console.log('recieved push');
-    socket.broadcast.to(data.room).emit('pull_message', (data));
-  })
-  //on
-  socket.on('disconnect', function(){
-  });
-})
+//deal with socket connect and events.
+io.sockets.on('connection', socket);
 
 // Static files -----------------
 app.use(express.static(__dirname + '/production'));
